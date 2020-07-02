@@ -17,6 +17,7 @@ typedef int BOOL;
 #endif
 
 #ifdef _WIN32
+//#pragma warning (disable:26495)
 #pragma warning (disable:4996)
 #endif
 
@@ -126,8 +127,11 @@ typedef struct
 } bot_current_weapon_t;
 
 
-typedef struct
+class bot_t
 {
+public:
+   bot_t() { memset(this, 0, sizeof(bot_t)); }
+
    bool is_used;
    int respawn_state;
    edict_t *pEdict;
@@ -305,7 +309,7 @@ typedef struct
    bot_current_weapon_t current_weapon;  // one current weapon for each bot
    int m_rgAmmo[MAX_AMMO_SLOTS];  // total ammo amounts (1 array for each bot)
 
-} bot_t;
+};
 
 
 #define MAX_TEAMS 32
