@@ -236,10 +236,11 @@ void BotNameInit( void )
              (fgets(name_buffer, 80, bot_name_fp) != NULL))
       {
          length = strlen(name_buffer);
+         int lastpos = (length > 0) ? length - 1 : 0;
 
-         if (name_buffer[length-1] == '\n')
+         if (name_buffer[lastpos] == '\n')
          {
-            name_buffer[length-1] = 0;  // remove '\n'
+            name_buffer[lastpos] = 0;  // remove '\n'
             length--;
          }
 
