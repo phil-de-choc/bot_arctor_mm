@@ -1662,7 +1662,7 @@ void BotShootAtEnemy( bot_t *pBot )
    if ((delta_dist_x > 100.0) && (RANDOM_LONG(1, 100) < 40))
    {
       pBot->f_aim_x_angle_delta += 
-         aim_tracking_x_scale[pBot->bot_skill] * pBot->f_frame_time * 0.8;
+         aim_tracking_x_scale[pBot->bot_skill] * pBot->f_frame_time * 0.8F;
    }
    else
    {
@@ -1673,13 +1673,13 @@ void BotShootAtEnemy( bot_t *pBot )
    if (RANDOM_LONG(1, 100) < ((pBot->bot_skill+1) * 10))
    {
       pBot->f_aim_x_angle_delta += 
-         aim_tracking_x_scale[pBot->bot_skill] * pBot->f_frame_time * 0.5;
+         aim_tracking_x_scale[pBot->bot_skill] * pBot->f_frame_time * 0.5F;
    }
 
    if ((delta_dist_y > 100.0) && (RANDOM_LONG(1, 100) < 40))
    {
       pBot->f_aim_y_angle_delta += 
-         aim_tracking_y_scale[pBot->bot_skill] * pBot->f_frame_time * 0.8;
+         aim_tracking_y_scale[pBot->bot_skill] * pBot->f_frame_time * 0.8F;
    }
    else
    {
@@ -1690,7 +1690,7 @@ void BotShootAtEnemy( bot_t *pBot )
    if (RANDOM_LONG(1, 100) < ((pBot->bot_skill+1) * 10))
    {
       pBot->f_aim_y_angle_delta += 
-         aim_tracking_y_scale[pBot->bot_skill] * pBot->f_frame_time * 0.5;
+         aim_tracking_y_scale[pBot->bot_skill] * pBot->f_frame_time * 0.5F;
    }
 
    if (pBot->f_aim_x_angle_delta > 5.0)
