@@ -58,7 +58,7 @@ void WINAPI GiveFnptrsToDll( enginefuncs_t* pengfuncsFromEngine, globalvars_t *p
 
    game_dll_filename[0] = 0;
 
-   if (strcmpi(mod_name, "valve") == 0 || strcmpi(mod_name, "bot_arctor") == 0)
+   if (strcmpi(mod_name, "valve") == 0 || strcmpi(mod_name, "bot_arctor") == 0) // PC, added: bot_arctor
    {
       mod_id = VALVE_DLL;
 #ifndef __linux__

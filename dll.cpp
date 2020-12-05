@@ -52,7 +52,7 @@ static FILE *fp;
 int mod_id = 0;
 int m_spriteTexture = 0;
 int default_bot_skill = 2;
-int bot_strafe_percent = 20; // percent of time to strafe
+int bot_strafe_percent = 100; // percent of time to strafe, PC, was 20
 int bot_chat_percent = 10;   // percent of time to chat
 int bot_taunt_percent = 20;  // percent of time to taunt after kill
 int bot_whine_percent = 10;  // percent of time to whine after death

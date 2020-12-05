@@ -1943,4 +1943,3 @@ void BotGrenadeThrow( bot_t *pBot )
          FakeClientCommand(pEdict, "-gren2", NULL, NULL);
    }
 }
-

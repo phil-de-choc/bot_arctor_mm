@@ -79,7 +79,7 @@ char bot_logos[MAX_BOT_LOGOS][16];
 
 bot_t bots[32];   // max of 32 bots in a game
 bool b_observer_mode = FALSE;
-bool b_botdontshoot = FALSE;
+bool b_botdontshoot = TRUE; // PC, was FALSE
 
 
 // how often (out of 1000 times) the bot will pause, based on bot skill
@@ -688,7 +688,7 @@ void BotCreate( edict_t *pPlayer, const char *arg1, const char *arg2,
       pBot->chat_swap_percent = bot_chat_swap_percent;
       pBot->chat_lower_percent = bot_chat_lower_percent;
       pBot->logo_percent = bot_logo_percent;
-      pBot->f_strafe_direction = 0.0;  // not strafing
+      pBot->f_strafe_direction = 1.0;  // PC: 0.0 = not strafing
       pBot->f_strafe_time = 0.0;
       pBot->reaction_time = bot_reaction_time;
 
@@ -1630,7 +1630,7 @@ void BotThink( bot_t *pBot )
       return;
    }
 
-      if ((bot_chat_count > 0) && (pBot->f_bot_chat_time < gpGlobals->time))
+   if ((bot_chat_count > 0) && (pBot->f_bot_chat_time < gpGlobals->time))
    {
       pBot->f_bot_chat_time = gpGlobals->time + 30.0;
 
@@ -1890,11 +1890,13 @@ void BotThink( bot_t *pBot )
          }
       }
       else
-         pBot->pBotEnemy = NULL;  // clear enemy pointer (no ememy for you!)
+         // PC, was : pBot->pBotEnemy = NULL;
+         pBot->pBotEnemy = BotFindEnemy(pBot);  // clear enemy pointer (no ememy for you!)
 
       if (pBot->pBotEnemy != NULL)  // does an enemy exist?
       {
-         BotShootAtEnemy( pBot );  // shoot at the enemy
+         // PC, was: BotShootAtEnemy( pBot );
+         // shoot at the enemy
 
          pBot->f_pause_time = 0;  // dont't pause if enemy exists
       }
@@ -2607,6 +2609,11 @@ void BotThink( bot_t *pBot )
 
    if (pBot->f_strafe_time < gpGlobals->time)  // time to strafe yet?
    {
+      // change direction after 0.5 seconds
+      pBot->f_strafe_time = gpGlobals->time + 0.5; // time in seconds?
+      pBot->f_strafe_direction = -1 * pBot->f_strafe_direction;
+
+   /* // previous code :
       pBot->f_strafe_time = gpGlobals->time + RANDOM_FLOAT(0.1, 1.0);
 
       if (RANDOM_LONG(1, 100) <= pBot->strafe_percent)
@@ -2618,6 +2625,7 @@ void BotThink( bot_t *pBot )
       }
       else
          pBot->f_strafe_direction = 0.0;
+   */
    }
 
    if (pBot->f_duck_time > gpGlobals->time)
@@ -2702,9 +2710,9 @@ void BotThink( bot_t *pBot )
    // save the previous speed (for checking if stuck)
    pBot->f_prev_speed = pBot->f_move_speed;
 
-   f_strafe_speed = pBot->f_strafe_direction * (pBot->f_move_speed / 2.0);
+   f_strafe_speed = pBot->f_strafe_direction * (pBot->f_move_speed /* / 2.0*/); // PC removed: 2.0
 
-   g_engfuncs.pfnRunPlayerMove( pEdict, pEdict->v.v_angle, pBot->f_move_speed,
+   g_engfuncs.pfnRunPlayerMove( pEdict, pEdict->v.v_angle, /*PC, was: pBot->f_move_speed*/ 0, 
                                 f_strafe_speed, 0, pEdict->v.button, 0, pBot->msecval);
 
    return;

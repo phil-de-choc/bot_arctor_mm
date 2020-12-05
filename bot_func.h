@@ -56,6 +56,5 @@ bool BotShootTripmine( bot_t *pBot );
 bool BotGrenadeArm( bot_t *pBot );
 void BotGrenadeThrow( bot_t *pBot );
 
-
 #endif // BOT_FUNC_H
 
